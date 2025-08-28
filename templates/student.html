@@ -2,7 +2,7 @@
 {% block content %}
   <h1>👩‍🎓 Student Dashboard</h1>
 
-  <!-- Login Form -->
+  
   <h2>Login</h2>
   <form id="studentLogin">
     <label>ID: <input type="text" id="id" name="id" value="23aiml001" required></label><br>
@@ -11,7 +11,7 @@
   </form>
   <pre id="loginResult"></pre>
 
-  <!-- Marks by Date -->
+  
   <div id="studentSection" style="display:none;">
     <h2>Check Marks by Date</h2>
     <form id="studentMarks">
@@ -20,14 +20,12 @@
     </form>
     <pre id="marksResult"></pre>
 
-    <!-- Attendance History -->
     <h2>Attendance History</h2>
     <form id="studentAttendance">
       <button type="submit">Get Attendance</button>
     </form>
     <pre id="attResult"></pre>
 
-    <!-- Logout -->
     <h2>Logout</h2>
     <form id="studentLogout">
       <button type="submit">Logout</button>
@@ -52,7 +50,7 @@
       return res.json();
     }
 
-    // Login
+    
     document.getElementById("studentLogin").addEventListener("submit", async e => {
       e.preventDefault();
       const id = document.getElementById("id").value;
@@ -75,7 +73,7 @@
       }
     });
 
-    // Marks
+    
     document.getElementById("studentMarks").addEventListener("submit", async e => {
       e.preventDefault();
       if (!loggedIn) return alert("❌ Please login first");
@@ -84,7 +82,6 @@
       document.getElementById("marksResult").textContent = JSON.stringify(res, null, 2);
     });
 
-    // Attendance
     document.getElementById("studentAttendance").addEventListener("submit", async e => {
       e.preventDefault();
       if (!loggedIn) return alert("❌ Please login first");
@@ -92,7 +89,6 @@
       document.getElementById("attResult").textContent = JSON.stringify(res, null, 2);
     });
 
-    // Logout
     document.getElementById("studentLogout").addEventListener("submit", async e => {
       e.preventDefault();
       const res = await fetch("/student/logout", { method: "POST" });
