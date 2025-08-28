@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>📂 Smart File Assist</h1>
+  <form id="fileForm" enctype="multipart/form-data">
+    <input type="file" name="file" required>
+    <button type="submit">Upload & Analyze</button>
+  </form>
+  <pre id="fileResult"></pre>
+
+  <script>
+    document.getElementById("fileForm").onsubmit = async e => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      const res = await fetch("/assist/file", { method: "POST", body: formData });
+      document.getElementById("fileResult").textContent = JSON.stringify(await res.json(), null, 2);
+    };
+  </script>
+{% endblock %}

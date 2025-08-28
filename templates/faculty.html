@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Faculty Dashboard</h1>
+
+  <h2>AI Faculty Overview</h2>
+  <form id="facultyOverview">
+    <button type="submit">Get Faculty Overview</button>
+  </form>
+  <pre id="facultyResult"></pre>
+
+  <!-- <h2>Submit Attendance</h2>
+  <form id="facultyAttendance">
+    <label>Faculty Code: <input type="number" name="faculty_code" required></label><br>
+    <label>Student Name: <input type="text" name="student"></label>
+    <label>Status: <input type="text" name="status" value="P"></label><br>
+    <button type="submit">Submit Attendance</button>
+  </form>
+  <pre id="attResult"></pre> -->
+
+  <script>
+    // Helper for POST requests
+    async function postJSON(url, data) {
+      const res = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      });
+      return res.json();
+    }
+
+    // Faculty Overview AJAX (GET)
+    document.getElementById("facultyOverview").addEventListener("submit", async function(e) {
+      e.preventDefault();
+      try {
+        const res = await fetch("/faculty/overview");
+        if (!res.ok) {
+          document.getElementById("facultyResult").textContent = "Error: " + res.status;
+          return;
+        }
+        const data = await res.json();
+        document.getElementById("facultyResult").textContent = JSON.stringify(data, null, 2);
+      } catch (err) {
+        document.getElementById("facultyResult").textContent = "Network error: " + err;
+      }
+    });
+
+    // Attendance Submission AJAX (POST)
+    document.getElementById("facultyAttendance").addEventListener("submit", async function(e) {
+      e.preventDefault();
+      const form = e.target;
+      const data = {
+        faculty_code: form.faculty_code.value,
+        attendance_data: { [form.student.value]: form.status.value }
+      };
+      try {
+        const result = await postJSON("/faculty/attendance", data);
+        document.getElementById("attResult").textContent = JSON.stringify(result, null, 2);
+      } catch (err) {
+        document.getElementById("attResult").textContent = "Network error: " + err;
+      }
+    });
+  </script>
+{% endblock %}
