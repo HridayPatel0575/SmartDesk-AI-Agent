@@ -1,0 +1,11 @@
+flask
+pandas
+numpy
+matplotlib
+seaborn
+statistics
+python-docx
+PyPDF2
+Pillow
+google-generativeai
+agno
