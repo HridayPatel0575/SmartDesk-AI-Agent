@@ -43,4 +43,10 @@ As part of the internship, I was tasked with identifying the type of tool most u
 
 ---
 
+## Blog / References
+
+Read my detailed blog about this internship and project here:  
+[Building a Document Reader AI Tool During My Internship at Agno](https://dev.to/hriday_patel_fc9018170287/building-a-document-reader-ai-tool-during-my-internship-at-agno-25g0)
+
+
 
